@@ -34,7 +34,7 @@ cmd="qemu-system-x86_64" # The name of the qemu file to launch
 
 # Categories
 arch=(archlinux endeavour)
-deb=(debian ubuntu linuxmint popos kali parrot)
+deb=(debian ubuntu linuxmint popos kali parrot tails)
 rpm=(fedora nobara)
 bsd=(freebsd netbsd openbsd)
 notlinux=(freedos)
@@ -57,6 +57,7 @@ linuxmint=("LinuxMint" "amd64" "release" "minturl")
 popos=("PopOS" "amd64" "release" "popurl")
 kali=("Kali" "amd64" "kali-weekly" "kaliurl")
 parrot=("Parrot" "amd64" "testing" "parroturl")
+tails=("Tails" "amd64" "stable" "tailsurl")
 
 # Fedora/RedHat-based distros
 fedora=("Fedora" "amd64" "Workstation" "fedoraurl")

@@ -114,6 +114,16 @@ output="parrot.iso"
 checkfile $1
 }
 
+tailsurl () {
+mirror="https://mirrors.edge.kernel.org/tails/stable/"
+x=$(curl -s $mirror | grep tails-amd64 | awk -F "\"" '{print $2}')
+new="$mirror$x"
+x=$(curl -s $new | grep ".iso</a>" | awk -F "\"" '{print $2}')
+new="$new$x"
+output="tails.iso"
+checkfile $1
+}
+
 
 fedoraurl () {
 mirror="https://getfedora.org/en/workstation/download/"
