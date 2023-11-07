@@ -34,7 +34,7 @@ cmd="qemu-system-x86_64" # The name of the qemu file to launch
 
 # Categories
 arch=(archlinux endeavour)
-deb=(debian ubuntu linuxmint popos kali parrot tails)
+deb=(debian debian_testing ubuntu kubuntu xubuntu linuxmint popos kali parrot tails)
 rpm=(fedora nobara)
 bsd=(freebsd netbsd openbsd)
 notlinux=(freedos)
@@ -51,8 +51,11 @@ archlinux=("ArchLinux" "amd64" "rolling" "archurl")
 endeavour=("EendeavourOS" "amd64" "latest" "endeavoururl")
 
 # Debian/Ubuntu-based distros
-debian=("Debian" "amd64" "testing" "debianurl")
+debian=("Debian" "amd64" "stable" "debianurl")
+debian_testing=("Debian" "amd64" "testing" "debiantestingurl")
 ubuntu=("Ubuntu" "amd64" "daily-live" "ubuntuurl")
+kubuntu=("Kubuntu" "amd64" "daily-live" "kubuntuurl")
+xubuntu=("Xubuntu" "amd64" "daily-live" "xubuntuurl")
 linuxmint=("LinuxMint" "amd64" "release" "minturl")
 popos=("PopOS" "amd64" "release" "popurl")
 kali=("Kali" "amd64" "kali-weekly" "kaliurl")

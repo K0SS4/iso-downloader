@@ -65,9 +65,18 @@ checkfile $1
 }
 
 debianurl () {
+mirror="https://cdimage.debian.org/cdimage/release/"
+version=$(curl -s $mirror | grep "<a href" -m4 | tail -n1 | awk -F "\"" '{print $6}')
+new="$mirror${version}amd64/iso-dvd/debian-${version:0:-1}-amd64-DVD-1.iso"
+output="debian.iso"
+notlive
+checkfile $1
+}
+
+debiantestingurl () {
 x="https://cdimage.debian.org/cdimage/weekly-builds/amd64/iso-dvd/debian-testing-amd64-DVD-1.iso"
 new="$x"
-output="debian.iso"
+output="debian_testing.iso"
 notlive
 checkfile $1
 }
@@ -77,6 +86,22 @@ mirror="http://cdimage.ubuntu.com/daily-live/current/"
 x=$(curl -s $mirror | grep -m1 desktop-amd64.iso | awk -F\" '{ print $2 }' | awk -F\" '{ print $1 }')
 new="$mirror/$x"
 output="ubuntu.iso"
+checkfile $1
+}
+
+kubuntuurl () {
+mirror="http://cdimage.ubuntu.com/kubuntu/daily-live/current/"
+x=$(curl -s $mirror | grep -m1 desktop-amd64.iso | awk -F\" '{ print $2 }' | awk -F\" '{ print $1 }')
+new="$mirror/$x"
+output="kubuntu.iso"
+checkfile $1
+}
+
+xubuntuurl () {
+mirror="http://cdimage.ubuntu.com/xubuntu/daily-live/current/"
+x=$(curl -s $mirror | grep -m1 desktop-amd64.iso | awk -F\" '{ print $2 }' | awk -F\" '{ print $1 }')
+new="$mirror/$x"
+output="xubuntu.iso"
 checkfile $1
 }
 
