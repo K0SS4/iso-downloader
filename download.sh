@@ -18,11 +18,7 @@ echo "* several distros - space separated (e.g. for getting both Arch and Debian
 echo "* 'all' option, the script will ONLY download ALL of the ISOs (warning: this can take a lot of space (100+GB) !)"
 echo "* 'filesize' option will check the local (downloaded) filesizes of ISOs vs. the current/recent ISOs filesizes on the websites"
 echo "* 'netbootxyz' option allows you to boot from netboot.xyz via network"
-echo "* 'netbootsal' option will boot from boot.salstar.sk"
 }
-
-# the public ipxe mirror does not work
-#echo "* 'netbootipxe' option will boot from boot.ipxe.org"
 
 # NB: I wanted to add ElementaryOS but the developers made it way too hard to implement auto-downloading.
 # If you can find constant mirror or place for actual release of ElementaryOS, please do a pull-request or just leave a comment.
@@ -37,157 +33,41 @@ cmd="qemu-system-x86_64" # The name of the qemu file to launch
 . distrofunctions.sh
 
 # Categories
-arch=(archlinux manjaro arcolinux archbang parabola endeavour artix arco garuda rebornos archlabs namib obarun archcraft peux bluestar xerolinux)
-deb=(debian ubuntu linuxmint zorinos popos deepin mxlinux knoppix kali puppy pureos elementary backbox devuan jingos cutefishos parrot)
-rpm=(fedora centos opensuse rosa altlinux mandriva mageia clearos alma rocky qubes nobara ultramarine springdale berry risios eurolinux)
-other=(alpine tinycore porteus slitaz pclinuxos void fourmlinux kaos clearlinux dragora slackware adelie plop solus peropesis openmamba pisi)
-sourcebased=(gentoo sabayon calculate nixos guix crux gobolinux easyos)
-containers=(rancheros k3os flatcar silverblue photon coreos dcos)
-bsd=(freebsd netbsd openbsd ghostbsd hellosystem dragonflybsd pfsense opnsense midnightbsd truenas nomadbsd hardenedbsd xigmanas clonos)
-notlinux=(openindiana minix haiku menuetos kolibri reactos freedos)
+arch=(archlinux endeavour)
+deb=(debian ubuntu linuxmint popos kali parrot)
+rpm=(fedora nobara)
+bsd=(freebsd netbsd openbsd)
+notlinux=(freedos)
 
 # All distributions
-category_names=("Arch-based" "DEB-based" "RPM-based" "Other" "Source-based" "Containers and DCs" "BSD, NAS, Firewall" "Not linux")
-distro_all=("arch" "deb" "rpm" "other" "sourcebased" "containers" "bsd" "notlinux")
-distro_arr=("${arch[@]}" "${deb[@]}" "${rpm[@]}" "${other[@]}" "${sourcebased[@]}" "${containers[@]}" "${bsd[@]}" "${notlinux[@]}")
+category_names=("Arch-based" "DEB-based" "RPM-based" "BSD" "Not linux")
+distro_all=("arch" "deb" "rpm" "bsd" "notlinux")
+distro_arr=("${arch[@]}" "${deb[@]}" "${rpm[@]}" "${bsd[@]}" "${notlinux[@]}")
 
 # Legend ## Distroname ## Arch  ## Type     ## Download URL function name
 
 # Archlinux-based distros
 archlinux=("ArchLinux" "amd64" "rolling" "archurl")
-manjaro=("Manjaro" "amd64" "rolling" "manjarourl")
-arcolinux=("Arcolinux" "amd64" "rolling" "arcourl")
-archbang=("Archbang" "amd64" "rolling" "archbangurl")
-parabola=("Parabola" "amd64" "rolling" "parabolaurl")
 endeavour=("EendeavourOS" "amd64" "latest" "endeavoururl")
-artix=("ArtixLinux" "amd64" "daily" "artixurl")
-arco=("ArcoLinux" "amd64" "release" "arcourl")
-garuda=("Garuda" "amd64" "release" "garudaurl")
-rebornos=("RebornOS" "amd64" "release" "rebornurl")
-archlabs=("ArchLabs" "amd64" "release" "archlabsurl")
-namib=("Namib" "amd64" "release" "namiburl")
-obarun=("Obarun" "amd64" "rolling" "obarunurl")
-archcraft=("ArchCraft" "amd64" "release" "archcrafturl")
-peux=("Peux" "amd64" "release" "peuxurl")
-bluestar=("Bluestar" "amd64" "release" "bluestarurl")
-xerolinux=("XeroLinux" "amd64" "rolling" "xerourl")
-
-# Consider in the future if the distros continue to evolve
-# https://sourceforge.net/projects/calinixos/
-# https://sourceforge.net/projects/hefftorlinux/
 
 # Debian/Ubuntu-based distros
 debian=("Debian" "amd64" "testing" "debianurl")
 ubuntu=("Ubuntu" "amd64" "daily-live" "ubuntuurl")
 linuxmint=("LinuxMint" "amd64" "release" "minturl")
-zorinos=("ZorinOS" "amd64" "core" "zorinurl")
 popos=("PopOS" "amd64" "release" "popurl")
-deepin=("Deepin" "amd64" "release" "deepinurl")
-mxlinux=("MXLinux" "amd64" "release" "mxurl")
-knoppix=("Knoppix" "amd64" "release" "knoppixurl")
 kali=("Kali" "amd64" "kali-weekly" "kaliurl")
-puppy=("Puppy" "amd64" "bionicpup64" "puppyurl")
-pureos=("PureOS" "amd64" "release" "pureurl")
-elementary=("ElementaryOS" "amd64" "release" "elementurl")
-backbox=("Backbox" "amd64" "release" "backboxurl")
-devuan=("Devuan" "amd64" "beowulf" "devuanurl")
-jingos=("JingOS" "amd64" "v0.9" "jingosurl")
-cutefishos=("CutefishOS" "amd64" "release" "cutefishosurl")
 parrot=("Parrot" "amd64" "testing" "parroturl")
-
-# Add if wanted
-# https://distrowatch.com/table.php?distribution=rebeccablackos
-# https://distrowatch.com/table.php?distribution=regata
-# https://distrowatch.com/table.php?distribution=uruk
-# https://distrowatch.com/table.php?distribution=netrunner
 
 # Fedora/RedHat-based distros
 fedora=("Fedora" "amd64" "Workstation" "fedoraurl")
-centos=("CentOS" "amd64" "stream" "centosurl")
-opensuse=("OpenSUSE" "amd64" "tumbleweed" "suseurl")
-rosa=("ROSA" "amd64" "desktop-fresh" "rosaurl")
-altlinux=("ALTLinux" "amd64" "release" "alturl")
-mandriva=("Mandriva" "amd64" "release" "mandrivaurl")
-mageia=("Mageia" "amd64" "cauldron" "mageiaurl")
-clearos=("ClearOS" "amd64" "release" "clearosurl")
-alma=("AlmaLinux" "amd64" "release" "almaurl")
-rocky=("RockyLinux" "amd64" "rc" "rockyurl")
-qubes=("QubesOS" "amd64" "release" "qubesurl")
 nobara=("Nobara" "amd64" "release" "nobaraurl")
-ultramarine=("Ultramarine" "amd64" "release" "ultraurl")
-springdale=("Springdale" "amd64" "release" "springurl")
-berry=("Berry" "amd64" "release" "berryurl")
-risios=("RisiOS" "amd64" "release" "risiurl")
-eurolinux=("EuroLinux" "amd64" "release" "eurourl")
-
-# Other distros
-alpine=("Alpine" "amd64" "extended" "alpineurl")
-tinycore=("TinyCore" "amd64" "current" "tinycoreurl")
-porteus=("Porteus" "amd64" "kiosk" "porteusurl")
-slitaz=("SliTaz" "amd64" "rolling" "slitazurl")
-pclinuxos=("PCLinuxOS" "amd64" "livecd" "pclinuxosurl")
-void=("Void" "amd64" "live" "voidurl")
-fourmlinux=("4mlinux" "amd64" "release" "fourmurl")
-kaos=("kaos" "amd64" "release" "kaosurl")
-clearlinux=("ClearLinux" "amd64" "release" "clearurl")
-dragora=("Dragora" "amd64" "release" "dragoraurl")
-slackware=("Slackware" "amd64" "current" "slackwareurl")
-adelie=("Adelie" "amd64" "rc1" "adelieurl")
-plop=("Plop" "amd64" "current-stable" "plopurl")
-solus=("Solus" "amd64" "release" "solusurl")
-peropesis=("Peropesis" "amd64" "live" "peropesisurl")
-openmamba=("Openmamba" "amd64" "rolling" "openmambaurl")
-pisi=("Pisilinux" "amd64" "release" "pisiurl")
-
-# Source-based distros
-gentoo=("Gentoo" "amd64" "admincd" "gentoourl")
-sabayon=("Sabayon" "amd64" "daily" "sabayonurl")
-calculate=("Calculate" "amd64" "release" "calcurl")
-nixos=("NixOS" "amd64" "unstable" "nixurl")
-guix=("Guix" "amd64" "release" "guixurl")
-crux=("CRUX" "amd64" "release" "cruxurl")
-gobolinux=("GoboLinux" "amd64" "release" "gobourl")
-easyos=("EasyOS" "amd64" "dunfell" "easyurl")
-
-# Distros for containers and data-centers
-rancheros=("RancherOS" "amd64" "release" "rancherurl")
-k3os=("K3OS" "amd64" "release" "k3osurl")
-flatcar=("Flatcar" "amd64" "release" "flatcarurl")
-silverblue=("Silverblue" "amd64" "release" "silverblueurl")
-photon=("PhotonOS" "amd64" "fulliso" "photonurl")
-coreos=("CoreOS" "amd64" "next" "coreosurl")
-dcos=("DC/OS" "amd64" "script" "dcosurl")
 
 # FreeBSD family
 freebsd=("FreeBSD" "amd64" "release" "freebsdurl")
 netbsd=("NetBSD" "amd64" "release" "netbsdurl")
 openbsd=("OpenBSD" "amd64" "release" "openbsdurl")
-ghostbsd=("GhostBSD" "amd64" "release" "ghostbsdurl")
-hellosystem=("HelloSystem" "amd64" "v0.5" "hellosystemurl")
-dragonflybsd=("DragonflyBSD" "amd64" "release" "dragonurl")
-pfsense=("pfSense" "amd64" "release" "pfsenseurl")
-opnsense=("opnsense" "amd64" "release" "opnsenseurl")
-midnightbsd=("midnightbsd" "amd64" "release" "midnightbsdurl")
-truenas=("truenas" "amd64" "release" "truenasurl")
-nomadbsd=("nomadbsd" "amd64" "release" "nomadbsdurl")
-hardenedbsd=("hardenedbsd" "amd64" "latest" "hardenedbsdurl")
-xigmanas=("xigmanas" "amd64" "release" "xigmanasurl")
-clonos=("clonos" "amd64" "release" "clonosurl")
-
-# Add more FreeBSD stuff
-# https://en.wikipedia.org/wiki/List_of_BSD_operating_systems
-# https://en.wikipedia.org/wiki/List_of_products_based_on_FreeBSD
 
 # Not linux, but free
-
-# Add More Solaris stuff https://solaris.com
-
-openindiana=("OpenIndiana" "amd64" "release" "indianaurl")
-minix=("MINIX" "amd64" "release" "minixurl")
-haiku=("Haiku" "amd64" "nightly" "haikuurl")
-menuetos=("MenuetOS" "amd64" "release" "menueturl")
-kolibri=("Kolibri" "amd64" "release" "kolibriurl")
-reactos=("ReactOS" "amd64" "release" "reactosurl")
 freedos=("FreeDOS" "amd64" "release" "freedosurl")
 
 drawmenu () {
@@ -222,7 +102,7 @@ normalmode () {
 	if [ "$x" = "menu" ]; then drawmenu; exit; fi
 	
 	# This questions are asked ONLY if user hadn't used the option "all".
-	if [ "$x" != "all" ] && [ "$x" != "filesize" ] && [ "$x" != "netbootxyz" ] && [ "$x" != "netbootsal" ] && [ "$noconfirm" != "1" ] && [ "$x" != "netbootipxe" ]; then
+	if [ "$x" != "all" ] && [ "$x" != "filesize" ] && [ "$x" != "netbootxyz" ] && [ "$noconfirm" != "1" ]; then
 		for distr in $x; do 
 		dist=${distro_arr[$distr]}
 		typeset -n arr=$dist
@@ -287,16 +167,6 @@ normalmode () {
 		if [ "$x" = "netbootxyz" ]; then
 			echo "Downloading netboot image from netboot.xyz, please wait..." && netbootxyz
 			echo "Loading netboot.xyz.iso..." && $cmd -boot d -cdrom netboot.xyz.iso -m $ram
-		fi
-	
-		if [ "$x" = "netbootsal" ]; then
-			echo "Downloading netboot image from boot.salstar.sk, please wait..." && netbootsal
-			echo "Loading ipxe.iso..." && $cmd -boot d -cdrom ipxe.iso -m $ram
-		fi
-	
-		if [ "$x" = "netbootipxe" ]; then
-                	echo "Downloading netboot image from boot.ipxe.org, please wait..." && netbootipxe
-                	echo "Loading bootipxe.iso..." && $cmd -boot d -cdrom bootipxe.iso -m $ram
 		fi
 	fi
 }
