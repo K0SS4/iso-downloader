@@ -63,7 +63,7 @@ parrot=("Parrot" "amd64" "testing" "parroturl")
 tails=("Tails" "amd64" "stable" "tailsurl")
 
 # Fedora/RedHat-based distros
-fedora=("Fedora" "amd64" "Workstation" "fedoraurl")
+fedora=("Fedora" "amd64" "Xfce" "fedoraurl")
 nobara=("Nobara" "amd64" "release" "nobaraurl")
 
 # FreeBSD family

@@ -151,12 +151,11 @@ checkfile $1
 
 
 fedoraurl () {
-mirror="https://getfedora.org/en/workstation/download/"
-new=$(curl -s $mirror | html2text | grep -m2 iso | awk -F "(" 'NR%2{printf "%s",$0;next;}1' | awk -F"(" '{ print $2 }' | awk -F")" '{ print $1 }')
-# Legacy
-#mirror="https://www.happyassassin.net/nightlies.html"
-#x=$(curl -s $mirror | grep -m1 Fedora-Workstation-Live-x86_64-Rawhide | awk -F\" '{ print $4 }')
-#new="$x"
+mirror="https://mirrors.kernel.org/fedora/releases/"
+version=$(curl -s $mirror | html2text | grep -Po "\\d+\/\]" | awk -F "/" '{print $1}' | sort -n | tail -1)
+mirror="$mirror$version/Workstation/x86_64/iso/"
+x=$(curl -s $mirror | grep "Fedora-Workstation-Live-x86_64-$version-" | awk -F "\"" '{print $2}')
+new="$mirror$x"
 output="fedora.iso"
 checkfile $1
 }

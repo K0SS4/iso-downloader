@@ -14,10 +14,11 @@ Bash script for autodownloading of different latest, "bleeding edge" Linux distr
 ```
 
 ## Requirements: 
-* Basic stuff: `linux`, `bash`, `curl`, `wget`, `awk`, `grep`, `xargs`, `pr`, `tail` (these tools usually are preinstalled on linux)
+* Basic stuff: `linux`, `bash`, `curl`, `wget`, `awk`, `grep`, `xargs`, `pr`, `tail`, `sort` (these tools usually are preinstalled on linux)
 * Additional depencency: `html2text`
 * If you want to run a VM after downloading, you'll need `QEMU`
 * Install all deps on Arch-based distro: `sudo pacman -S html2text qemu`
+* Some distros are shared as archive so you'll need `unzip`
 
 ## Currently supported distributions
 If you can't find your favourite linux distro in here, please create a github issue with details about it or add support for it yourself and do a pull request.
