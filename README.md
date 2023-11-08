@@ -23,17 +23,17 @@ Bash script for autodownloading of different latest, "bleeding edge" Linux distr
 ## Currently supported distributions
 If you can't find your favourite linux distro in here, please create a github issue with details about it or add support for it yourself and do a pull request.
 ```
-Arch-based:			  DEB-based:			    RPM-based:			      BSD:				Not linux:
-0 = archlinux			  2 = debian			    12 = fedora			      14 = freebsd			17 = freedos
-1 = endeavour			  3 = debian_testing		    13 = nobara			      15 = netbsd		
-				  4 = ubuntu			    				      16 = openbsd		
-				  5 = kubuntu			    				      				
-				  6 = xubuntu			    				      				
-				  7 = linuxmint			    				      				
-				  8 = popos			    				      				
-				  9 = kali			    				      				
-				  10 = parrot			    				      				
-				  11 = tails
+Arch-based:		    DEB-based:			RPM-based:		    BSD:			Other:		Not linux:
+0 = archlinux		    2 = debian			12 = fedora		    14 = freebsd		17 = memtest64bit	20 = freedos
+1 = endeavour		    3 = debian_testing		13 = nobara		    15 = netbsd			18 = memtest32bit	
+			    4 = ubuntu						    16 = openbsd		19 = antiviruslive	
+			    5 = kubuntu						    						
+			    6 = xubuntu						    						
+			    7 = linuxmint					    						
+			    8 = popos						    						
+			    9 = kali						    						
+			    10 = parrot						    						
+			    11 = tails
 ```
 
 ## How to use?

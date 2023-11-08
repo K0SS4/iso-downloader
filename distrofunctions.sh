@@ -195,6 +195,33 @@ checkfile $1
 }
 
 
+memtest64url () {
+    version=$(curl -Ls -o /dev/null -w %{url_effective} "https://github.com/memtest86plus/memtest86plus/releases/latest" | awk -F '/' '{print $8}' | cut -c 2-)
+    new="https://memtest.org/download/v$version/mt86plus_${version}_64.iso.zip"
+    output="memtest64.zip"
+    notlinux
+    wgetcmd
+    unzip $output
+    rm $output
+}
+
+memtest32url () {
+    version=$(curl -Ls -o /dev/null -w %{url_effective} "https://github.com/memtest86plus/memtest86plus/releases/latest" | awk -F '/' '{print $8}' | cut -c 2-)
+    new="https://memtest.org/download/v$version/mt86plus_${version}_32.iso.zip"
+    output="memtest32.zip"
+    notlinux
+    wgetcmd
+    unzip $output
+    rm $output
+}
+
+antivirusliveurl () {
+new="https://sourceforge.net/projects/antiviruslivecd/files/latest/download"
+output="antiviruslivecd.iso"
+checkfile $1
+}
+
+
 freedosurl () {
 #mirror="https://sourceforge.net/projects/freedos/files/latest/download"
 #mirror="https://www.freedos.org/download/download/FD12CD.iso"

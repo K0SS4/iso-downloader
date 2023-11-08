@@ -37,12 +37,13 @@ arch=(archlinux endeavour)
 deb=(debian debian_testing ubuntu kubuntu xubuntu linuxmint popos kali parrot tails)
 rpm=(fedora nobara)
 bsd=(freebsd netbsd openbsd)
+other=(memtest64bit memtest32bit antiviruslive)
 notlinux=(freedos)
 
 # All distributions
-category_names=("Arch-based" "DEB-based" "RPM-based" "BSD" "Not linux")
-distro_all=("arch" "deb" "rpm" "bsd" "notlinux")
-distro_arr=("${arch[@]}" "${deb[@]}" "${rpm[@]}" "${bsd[@]}" "${notlinux[@]}")
+category_names=("Arch-based" "DEB-based" "RPM-based" "BSD" "Other" "Not linux")
+distro_all=("arch" "deb" "rpm" "bsd" "other" "notlinux")
+distro_arr=("${arch[@]}" "${deb[@]}" "${rpm[@]}" "${bsd[@]}" "${other[@]}" "${notlinux[@]}")
 
 # Legend ## Distroname ## Arch  ## Type     ## Download URL function name
 
@@ -70,6 +71,11 @@ nobara=("Nobara" "amd64" "release" "nobaraurl")
 freebsd=("FreeBSD" "amd64" "release" "freebsdurl")
 netbsd=("NetBSD" "amd64" "release" "netbsdurl")
 openbsd=("OpenBSD" "amd64" "release" "openbsdurl")
+
+# Other
+memtest64bit=("Memtest86+" "amd64" "release" "memtest64url")
+memtest32bit=("Memtest86+" "i386" "release" "memtest32url")
+antiviruslive=("Antivirus Live CD" "amd64" "release" "antivirusliveurl")
 
 # Not linux, but free
 freedos=("FreeDOS" "amd64" "release" "freedosurl")
