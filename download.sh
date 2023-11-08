@@ -38,7 +38,7 @@ deb=(debian debian_testing ubuntu kubuntu xubuntu linuxmint popos kali parrot ta
 rpm=(fedora nobara)
 bsd=(freebsd netbsd openbsd)
 other=(memtest64bit memtest32bit antiviruslive)
-notlinux=(freedos)
+notlinux=(freedos netbootxyz)
 
 # All distributions
 category_names=("Arch-based" "DEB-based" "RPM-based" "BSD" "Other" "Not linux")
@@ -79,6 +79,7 @@ antiviruslive=("Antivirus Live CD" "amd64" "release" "antivirusliveurl")
 
 # Not linux, but free
 freedos=("FreeDOS" "amd64" "release" "freedosurl")
+netbootxyz=("netboot.xyz" "amd64" "release" "netbootxyz")
 
 drawmenu () {
 
@@ -107,9 +108,6 @@ normalmode () {
 			
 	# Happens if the input is empty
 	if [ -z "$x" ]; then echo "Empty distribution number. Please type-in number of according distro. Exiting"; exit; fi # "Empty" handling
-	
-	# Happens if we ask only for menu
-	if [ "$x" = "menu" ]; then drawmenu; exit; fi
 	
 	# This questions are asked ONLY if user hadn't used the option "all".
 	if [ "$x" != "all" ] && [ "$x" != "filesize" ] && [ "$x" != "netbootxyz" ] && [ "$noconfirm" != "1" ]; then
@@ -191,7 +189,7 @@ quickmode () {
 	exit 0;
 }
 
-VALID_ARGS=$(getopt -o hysd: --long help,noconfirm,silent,distro: -- "$@")
+VALID_ARGS=$(getopt -o hysld: --long help,noconfirm,silent,list,distro: -- "$@")
 if [[ $? -ne 0 ]]; then
     exit 1;
 fi
@@ -205,6 +203,7 @@ while [ : ]; do
 		echo "-h/--help: Show this help"
         echo "-y/--noconfirm: Download specified distro without confirmation. "
         echo "-s/--silent: Don't show help or extra info."
+        echo "-l/--list: List all the available distros with it's corresponding number."
         echo "-d/--distro: Download distributions specified in the comma-separated list. Example: 0,2,34"
         exit 0;
         ;;
@@ -217,6 +216,11 @@ while [ : ]; do
         echo "-s/--silent option specified. Script will not show help or extra info."
         silent=1
         shift
+        ;;
+    -l | --list)
+        echo "List of supported distros:"
+        drawmenu
+        exit 0;
         ;;
     -d | --distro)
         echo "-d/--distro option specified. Script will download distributions with the following numbers: '$2'"
